@@ -3,12 +3,12 @@ var Schema = mongoose.Schema
 
 var userSchema = new Schema({
   username :{
-    type:String,
+    type : String,
     unique: true
   },
     password: String,
-    type:String,
-    salt:String
+    type: String,
+    salt: String
 },{
     timestamps :true
   })

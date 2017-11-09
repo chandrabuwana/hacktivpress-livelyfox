@@ -15,7 +15,9 @@ var viewAllUser= (req,res)=>{
 
 var createUser = (req,res)=>{
   var salt = bcrypt.genSaltSync(10)
+  console.log(salt);
   var hash = bcrypt.hashSync(req.body.password, salt)
+  console.log(hash);
   User.create({
     username: req.body.username,
     password :hash,
@@ -24,6 +26,7 @@ var createUser = (req,res)=>{
   })
   .then(data=>{
     res.send(data)
+    console.log('oi');
   })
   .catch(err=>{
     console.error(err)
