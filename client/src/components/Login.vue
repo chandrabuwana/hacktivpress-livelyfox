@@ -20,13 +20,16 @@
     <a href="#" class="link_forgot_pass d_block" >Forgot Password ?</a>    
 <div class="terms_and_cons d_none">
     <p><input type="checkbox" name="terms_and_cons" /> <label for="terms_and_cons">Accept  Terms and Conditions.</label></p>
-  
     </div>
       </div>
+      <fb-signin-button :params="fbSignInParams"
+        @success="onSignInSuccess" @error="onSignInError" class="fb-signin-button fb-signin-button--facebook">Login with Facebook
+      </fb-signin-button><br><br>
   <div class="cont_btn">
      <button v-on:click.prevent="getLogin()"  class="btn_sign">SIGN IN</button>      
-      </div>      
-    </form>
+      
+        </div>      
+      </form>
     </div>    
   </div>
 </div>
@@ -58,13 +61,102 @@ export default {
       .catch(err=>{
         console.log(err);
       })
+    },onSignInSuccess (response) {
+      var self = this
+      // window.FB.api('/me', {fields: ['id', 'name', 'email', 'pictures']}, dude => {
+        // console.log(response)
+        // console.log(`Good to see you, ${dude.name}.`)
+      console.log('ini response nya ', response)
+      localStorage.setItem('fbaccesstoken', response.authResponse.accessToken)
+      axios({
+        method: 'post',
+        url: `http://localhost:3002/userfb`,
+        headers: {
+          fbaccesstoken: localStorage.getItem('fbaccesstoken')
+        }
+      })
+      .then(loginResponse => {
+        console.log('==========datanya', loginResponse.data)
+        localStorage.setItem('token', loginResponse.data.token)
+        localStorage.setItem('name', loginResponse.data.name)
+        localStorage.setItem('id', loginResponse.data.id)
+        this.checkLogin()
+      })
+      .catch(err => {
+        console.log('ada error ', err)
+        self.$router.push('/')
+      })
+      // })
+    },
+    onSignInError (error) {
+      console.log('OH NOES', error)
+    },
+    checkLogin () {
+      console.log('check login')
+      if (localStorage.fbaccesstoken) {
+        this.$router.push('/todo')
+      }
     }
+  },
+  created () {
+    this.checkLogin()
   }
-}
+} 
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.fb-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+}
+.fb-signin-button {
+  box-sizing: border-box;
+  position: relative;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #FFF;
+}
+.fb-signin-button:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.fb-signin-button:focus {
+  outline: none;
+}
+.fb-signin-button:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
+
+.fb-signin-button--facebook {
+  background-color: #4C69BA;
+  background-image: linear-gradient(#4C69BA, #3B55A0);
+  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  text-shadow: 0 -1px 0 #354C8C;
+}
+.fb-signin-button--facebook:before {
+  border-right: #364e92 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+}
+.fb-signin-button--facebook:hover,
+.fb-signin-button--facebook:focus {
+  background-color: #5B7BD5;
+  background-image: linear-gradient(#5B7BD5, #4864B1);
+}
 * {
   margin: 0px auto;
   padding: 0px;

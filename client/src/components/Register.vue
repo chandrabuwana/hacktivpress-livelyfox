@@ -1,28 +1,24 @@
 <template>
   <div class="cont_principal">
-  <div class="cont_centrar">
-  <div class="cont_login">
-    <form action="">
-    <div class="cont_tabs_login">
-      <ul class='ul_tabs'>
-        <!-- <li v-on:click.prevent="getRegister()" class="active"><a href="#" onclick="sign_in()">SIGN IN</a> -->
-        <span class="linea_bajo_nom"></span>
-        </li>
-        <li><router-link v-bind:to="'register'"><a href="#up" onclick="sign_up()">SIGN UP</a><span class="linea_bajo_nom"></span></router-link>
-        </li>
-      </ul>
-      </div>
+    <div class="cont_centrar">
+      <div class="cont_login">
+        <form action="">
+          <div class="cont_tabs_login">
+            <ul class='ul_tabs'>
+              <!-- <li v-on:click.prevent="getRegister()" class="active"><a href="#" onclick="sign_in()">SIGN IN</a> -->
+              <span class="linea_bajo_nom"></span>
+              </li>        
+            </ul>
+          </div>
         <div class="cont_text_inputs">
-      <input  type="text" class="input_form_sign " placeholder="NAME" name="name_us" />
-    
-      <input type="text" class="input_form_sign " placeholder="NAME" name="name_us" />
-    
-    <input v-model="register.username" type="text" class="input_form_sign d_block  active_inp" placeholder="Username" name="pass_us" />  
-   <input v-model="register.password" type="text" class="input_form_sign d_block  active_inp" placeholder="Password" name="pass_us" />
-   <input v-model="register.name" type="text" class="input_form_sign d_block  active_inp" placeholder="Name" name="pass_us" />  
-      </div>
-<div class="cont_btn">
-     <button v-on:click.prevent="getRegister()" class="btn_sign">SIGN IN</button>      
+          <input  type="text" class="input_form_sign " placeholder="NAME" name="name_us" />    
+          <input type="text" class="input_form_sign " placeholder="NAME" name="name_us" />    
+          <input v-model="register.username" type="text" class="input_form_sign d_block  active_inp" placeholder="Username" name="pass_us" />  
+          <input v-model="register.password" type="text" class="input_form_sign d_block  active_inp" placeholder="Password" name="pass_us" />
+          <input v-model="register.name" type="text" class="input_form_sign d_block  active_inp" placeholder="Name" name="pass_us" />  
+        </div>
+      <div class="cont_btn">
+        <button v-on:click.prevent="getRegister()" class="btn_sign">SIGN IN</button>      
       </div>      
     </form>
     </div>    
