@@ -5,11 +5,11 @@
     <form action="">
     <div class="cont_tabs_login">
       <ul class='ul_tabs'>
-        <router-link v-bind:to="'register'"></router-link><li class="active"><a href="#" onclick="sign_in()">REGISTER</a>
+        <li class="active"><router-link v-bind:to="'register'"><a href="#" onclick="sign_in()">REGISTER</a></router-link></li>
         <span class="linea_bajo_nom"></span>
-        </li>
-        <li><router-link ><a href="#up" onclick="sign_up()">SIGN UP</a><span class="linea_bajo_nom"></span></router-link>
-        </li>
+        
+        <!-- <li><router-link ><a href="#up" onclick="sign_up()">SIGN UP</a><span class="linea_bajo_nom"></span></router-link>
+        </li> -->
       </ul>
       </div>
   <div class="cont_text_inputs">

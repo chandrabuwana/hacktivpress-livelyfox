@@ -14,9 +14,9 @@ const state ={
 }
 
 const mutations = {
- setQuestion(state,payload){
+ setArticle(state,payload){
    console.log('datadi mutation',payload);
-   state.question = payload
+  //  state.article = payload
  }
 }
 
@@ -25,7 +25,7 @@ getArticle({commit }){
   http.get('/article')
   .then(({data})=>{
     console.log('data di actions',data)
-    commit('setQuestion',data)
+    commit('setArticle',data)
   })
   .catch(err=>{
     console.error(err)
